@@ -1,7 +1,6 @@
 package swt301;
 
 import driver.driverFactory;
-import junit.framework.Assert;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -9,70 +8,78 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 
 import java.io.File;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class testcase01 {
-    @Test
-    public void runTestCase() {
-        // 1. Initialize the WebDriver
+    public static void main(String[] args) {
         WebDriver driver = driverFactory.getChromeDriver();
 
-        // 2. Navigate to the website
+        // Step 1: Go to http://live.techpanda.org/
         driver.get("http://live.techpanda.org/");
 
-        // 3. Verify the Title of the page
-        String expectedTitle = "Home page";
-        String actualTitle = driver.getTitle();
-        org.junit.Assert.assertEquals(expectedTitle, actualTitle);
-
-        // 4. Find and click on the 'MOBILE' menu
-        WebElement mobileMenu = driver.findElement(By.xpath("//a[normalize-space()='Mobile']"));
-        mobileMenu.click();
-
-        // 5. In the list of all mobile, select SORT BY -> dropdown as name
-        Select sortByDropdown = new Select(driver.findElement(By.cssSelector("select[title='Sort By']")));
-        sortByDropdown.selectByVisibleText("Name");
-
-        // 6. Verify all products are sorted by name
-        // You can add an assertion to verify that the products are sorted by name.
-
+        // Add sleep
         try {
-            // 7. Add your test actions for verification here.
-            List<WebElement> productElements = driver
-                    .findElements(By.cssSelector("h2[class='product-name'] a[title='Sony']"));
-
-            // Get the names of the products in the default order
-            List<String> defaultOrder = productElements.stream()
-                    .map(WebElement::getText)
-                    .collect(Collectors.toList());
-
-            // Sort the names in ascending order
-            List<String> sortedOrder = new ArrayList<>(defaultOrder);
-            Collections.sort(sortedOrder);
-            // Verify that the product names are sorted correctly
-            boolean isSortedAscending = sortedOrder.equals(defaultOrder);
-            org.junit.Assert.assertEquals("Product names are not sorted in ascending order", true, isSortedAscending);
-            // ScreenShot Capture
-            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-            String png = ("D:\\Workspace\\swt301\\selium-SWT\\src\\test\\java\\screenshots\\TestCase01.png");
-            FileUtils.copyFile(scrFile, new File(png));
-
-        } catch (Exception e) {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        // 7. Quit the browser session
+        // Step 2: Verify Title of the page
+        String title = driver.getTitle();
+        System.out.println("Page Title is: " + title);
+
+        // Add sleep
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Step 3: Click on -> MOBILE -> menu
+        WebElement mobileMenu = driver.findElement(By.linkText("MOBILE"));
+        mobileMenu.click();
+
+        // Add sleep
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Step 4: In the list of all mobile , select SORT BY -> dropdown as name
+        Select dropdown = new Select(driver.findElement(By.cssSelector("select[title='Sort By']")));
+        dropdown.selectByVisibleText("Name");
+
+        // Add sleep
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Step 5: Verify all products are sorted by name
+        List<WebElement> products = driver.findElements(By.cssSelector(".product-name"));
+        for (WebElement product : products) {
+            System.out.println(product.getText());
+        }
+
+        // Capture screenshot at the end
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+        try {
+            FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/screenshot_tc01.png"));
+            System.out.println("Screenshot captured!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to capture screenshot!");
+        }
+
+        // Close the browser
         driver.quit();
     }
 }

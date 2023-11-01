@@ -51,10 +51,28 @@
         </dependency>
     
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.12</version>
-      </dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+    </dependency>
     </dependencies>
 
+<build>
+<plugins>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <configuration>
+        <archive>
+            <manifest>
+                <mainClass>
+                    com.company.MyApp
+                </mainClass>
+            </manifest>
+        </archive>
+    </configuration>
+</plugin>
+</plugins>
+</build>
 </project>
