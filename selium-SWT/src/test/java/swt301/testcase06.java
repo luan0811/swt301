@@ -2,13 +2,20 @@ package swt301;
 
 import POM.PurchasePage;
 import driver.driverFactory;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 public class testcase06 {
     @Test
-    public void testVerifyUserToPurchaseProduct() {
+    public static void main(String[] args) {
         WebDriver driver = driverFactory.getChromeDriver();
 
             driver.get("http://live.techpanda.org/");
@@ -17,7 +24,7 @@ public class testcase06 {
             purchasePage.clickMyAccountLink();
             purchasePage.clickLoginAccountLink();
             //Enter value to login
-            purchasePage.enterEmailLogin("luan2@gmail.com");
+            purchasePage.enterEmailLogin("l1@gmail.com");
             purchasePage.enterPasswordLogin("123456");
             purchasePage.clickLoginButton();
 
@@ -45,6 +52,15 @@ public class testcase06 {
             purchasePage.clickPlaceOrder();
 
 
+             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+        try {
+            FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/screenshot_tc06.png"));
+            System.out.println("Screenshot captured!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to capture screenshot!");
+        }
         driver.quit();
     }
 }
