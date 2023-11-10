@@ -14,8 +14,8 @@ import org.testng.annotations.Test;
 
 @Test
 public class testcase08 {
-
-    public static void main(String[] args) {
+@Test
+    public void tc08() {
         WebDriver driver = driverFactory.getChromeDriver();
         driver.get("http://live.techpanda.org/");
 

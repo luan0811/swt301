@@ -5,6 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
 
 import driver.driverFactory;
 
@@ -13,8 +14,10 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
+@Test
 public class testcase03 {
-    public static void main(String[] args) {
+    @Test
+    public void tc03() {
         WebDriver driver = driverFactory.getChromeDriver();
 
         // Step 1: Go to http://live.techpanda.org/

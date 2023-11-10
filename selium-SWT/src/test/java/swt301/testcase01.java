@@ -10,13 +10,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+@Test
 public class testcase01 {
-    public static void main(String[] args) {
+    @Test
+    public void main() {
         WebDriver driver = driverFactory.getChromeDriver();
 
         // Step 1: Go to http://live.techpanda.org/

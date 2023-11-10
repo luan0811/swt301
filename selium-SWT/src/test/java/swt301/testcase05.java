@@ -9,12 +9,15 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
 
 import POM.LoginForm;
 import driver.driverFactory;
 
+@Test
 public class testcase05 {
-    public static void main(String[] args) {
+    @Test
+    public void tc05() {
         WebDriver driver = driverFactory.getChromeDriver();
 
         // Step 1: Go to http://live.techpanda.org/
@@ -45,7 +48,7 @@ public class testcase05 {
 
         // Fill New User information
         LoginForm loginForm = new LoginForm(driver);
-        loginForm.fillForm("Test", "Mid","User", "luan1@gmail.com", "password123", "password123");
+        loginForm.fillForm("Test", "Mid","User", "luan3@gmail.com", "123456", "password123");
 
         // Add sleep
         try {

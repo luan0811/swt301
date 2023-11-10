@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 public class testcase06 {
     @Test
-    public static void main(String[] args) {
+    public void tc06() {
         WebDriver driver = driverFactory.getChromeDriver();
 
             driver.get("http://live.techpanda.org/");
@@ -24,7 +24,7 @@ public class testcase06 {
             purchasePage.clickMyAccountLink();
             purchasePage.clickLoginAccountLink();
             //Enter value to login
-            purchasePage.enterEmailLogin("l1@gmail.com");
+            purchasePage.enterEmailLogin("luan3@gmail.com");
             purchasePage.enterPasswordLogin("123456");
             purchasePage.clickLoginButton();
 
